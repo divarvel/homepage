@@ -1,5 +1,0 @@
-# Docker image to use for building
-image: alpine-3.23-ocaml-4.11-flambda
-command: dune exec bin/homepage.exe
-# Public directory
-public: _www

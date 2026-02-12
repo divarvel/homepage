@@ -1,0 +1,3 @@
+image: ocaml/opam:alpine-ocaml-5.4
+command: ./statichost_build.sh
+public: _www
