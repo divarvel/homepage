@@ -1,0 +1,34 @@
+<h1>Talks</h1>
+
+<main>
+{%- autoescape false -%}
+{{ yocaml_body }}
+{%- endautoescape -%}
+
+{% for talk in talks %}
+<article>
+  <h2>{{ talk.name }}
+   {% if talk.years %}<span class="talk-years">{{ talk.years }}</span>{% endif %}
+  </h2>
+  <p>{{ talk.description }}</p>
+  {% for entry in talk.entries %}
+    {%- if entry.type == "slides" -%}
+        {%- if entry.lang == "fr" -%}
+          {%- set t = "Lire (en Français 🇫🇷)" -%}
+        {%- else if entry.lang == "en" -%}
+          {%- set t = "Read (in English 🇬🇧)" -%}
+        {%- endif -%}
+    {%- else if entry.type == "video" -%}
+        {%- if entry.lang == "fr" -%}
+          {%- set t = "Regarder 📹 (en Français 🇫🇷)" -%}
+        {%- else if entry.lang == "en" -%}
+          {%- set t = "Watch 📹 (in English 🇬🇧)" -%}
+        {%- endif -%}
+    {%- endif -%}
+  <span class="talk-entry">
+    <a href="{{ entry.url }}">{{ t }}</a>
+  </span>
+  {% endfor %}
+</article>
+{% endfor %}
+</main>
