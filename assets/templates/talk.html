@@ -1,0 +1,24 @@
+<article>
+  <h1>{{ name }}
+   {% if years %}<span class="talk-years">{{ years }}</span>{% endif %}
+  </h1>
+  <p>{{ description }}</p>
+  {% for entry in entries %}
+    {%- if entry.type == "slides" -%}
+        {%- if entry.lang == "fr" -%}
+          {%- set t = "Lire (en Français 🇫🇷)" -%}
+        {%- else if entry.lang == "en" -%}
+          {%- set t = "Read (in English 🇬🇧)" -%}
+        {%- endif -%}
+    {%- else if entry.type == "video" -%}
+        {%- if entry.lang == "fr" -%}
+          {%- set t = "Regarder 📹 (en Français 🇫🇷)" -%}
+        {%- else if entry.lang == "en" -%}
+          {%- set t = "Watch 📹 (in English 🇬🇧)" -%}
+        {%- endif -%}
+    {%- endif -%}
+  <span class="talk-entry">
+    <a href="{{ entry.url }}">{{ t }}</a>
+  </span>
+  {% endfor %}
+</article>

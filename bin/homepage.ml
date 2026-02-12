@@ -52,6 +52,7 @@ let program () =
   >>= copy_images
   >>= create_pages
   >>= Talks.create_talk_index
+  >>= Talks.create_talks_pages
   >>= Action.store_cache cache
 
 let () = Yocaml_unix.run ~level:`Debug program
