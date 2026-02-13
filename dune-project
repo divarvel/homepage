@@ -23,15 +23,15 @@
   (ocaml
    (>= 5.3.0))
   (yocaml
-   (>= 3.0.0))
+   (>= 2.8.0))
   (yocaml_unix
-   (>= 3.0.0))
+   (>= 2.8.0))
   (yocaml_yaml
-   (>= 3.0.0))
+   (>= 2.8.0))
   (yocaml_markdown
-   (>= 3.0.0))
+   (>= 2.8.0))
   (yocaml_jingoo
-   (>= 3.0.0))
+   (>= 2.8.0))
   ;; dev setup
   (utop :with-dev-setup)
   (ocamlformat :with-dev-setup)
