@@ -108,7 +108,7 @@ module TalkList = struct
 end
 
 let (create_talk_index : Action.t) =
-  let path = Path.(www / "talks.html") in
+  let path = Path.(www / "talks" / "index.html") in
   let pipeline =
     let open Task in
     let+ () = track_binary

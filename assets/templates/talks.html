@@ -1,4 +1,4 @@
-<h1>Talks</h1>
+<h2>Talks</h2>
 
 <main>
 {%- autoescape false -%}
@@ -7,9 +7,9 @@
 
 {% for talk in talks %}
 <article>
-  <h2>{{ talk.name }}
+  <h3>{{ talk.name }}
    {% if talk.years %}<span class="talk-years">{{ talk.years }}</span>{% endif %}
-  </h2>
+  </h3>
   <p>{{ talk.description }}</p>
   {% for entry in talk.entries %}
     {%- if entry.type == "slides" -%}
