@@ -221,6 +221,17 @@ talks:
       - lang: fr
         type: video
         url: https://www.youtube.com/watch?v=-JOE8c0v84Q&list=PLgqACm4pzpkxFQDWtkArFtlgjnbFRW2nR
+  - name: "Les sites statiques, une alternative aux CMS"
+    desc: |
+        Pour une certaine typologie de sites (blogs, sites vitrines), la génération de site statique est une alternative intéressante aux CMS traditionnels.
+        Les bénéfices se font sentir en termes de sécurité, de performance et de workflow.
+        Plusieurs approches de la génération de sites statiques existent, j'en aborderai une, la plus flexible, basée sur l'outil Hakyll.
+        Je passerai en revue quelques cas d'utilisation et comment y répondre avec un générateur de site statique.
+    years: "2013"
+    entries:
+      - lang: fr
+        type: video
+        url: https://www.youtube.com/watch?v=JBd9Gk2MFgo
   - name: "Survival guide: modern CSS for the grumpy backend developer"
     desc: |
       Backend programming sounds hard. But we all know what really strikes fear in the hearts of backend devs: CSS.
