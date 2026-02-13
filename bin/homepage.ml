@@ -8,6 +8,9 @@ let copy_images =
     ~where images 
     (Action.copy_file ~into:images_path)
 
+let copy_index =
+  Action.copy_file ~into:Path.(www / "me") Path.(www/ "index.html")
+
 let create_css =
   let css_path = Path.(www / "style.css") in
   Action.Static.write_file css_path
@@ -51,6 +54,7 @@ let program () =
   >>= create_css
   >>= copy_images
   >>= create_pages
+  >>= copy_index
   >>= Talks.create_talk_index
   >>= Talks.create_talks_pages
   >>= Action.store_cache cache
