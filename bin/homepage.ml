@@ -11,6 +11,9 @@ let copy_images =
 let copy_index =
   Action.copy_file ~into:Path.(www / "me") Path.(www/ "index.html")
 
+let copy_redirects =
+  Action.copy_file ~into:www Path.(assets / "_redirects")
+
 let create_css =
   let css_path = Path.(www / "style.css") in
   Action.Static.write_file css_path
@@ -55,6 +58,7 @@ let program () =
   >>= copy_images
   >>= create_pages
   >>= copy_index
+  >>= copy_redirects
   >>= Talks.create_talk_index
   >>= Talks.create_talks_pages
   >>= Action.store_cache cache
