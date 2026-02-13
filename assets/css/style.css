@@ -72,3 +72,15 @@ article h2 {
 .talk-entry:not(:first-of-type)::before {
     content: " || ";
 }
+
+body>footer {
+    text-align: center;
+    border-top: 1px solid black;
+    margin-top: 10px;
+}
+
+body>footer ul {
+    display: flex;
+    list-style-type: none;
+}
+

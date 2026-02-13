@@ -12,4 +12,8 @@ In my free time, I try to contribute to FOSS, especially on software I use daily
 
 ### Biscuit
 
-I am a maintainer for (and project lead for) [Eclipse biscuit](https://biscuitsec.org).
+I am a maintainer of (and eclipse project lead for) [eclipse biscuit](https://biscuitsec.org).
+
+## Coffee
+
+[I like coffee](https://blog.clement.delafargue.name/posts/2025-04-01-my-coffee-workflow.html).
