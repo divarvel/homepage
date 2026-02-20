@@ -1,5 +1,15 @@
 ---
 talks:
+  - name: "Looks like you’re having fun with your hipster stack, but I’m living in the real world"
+    desc: |
+        I’ve been lucky enough to work with avant-garde tech in the past. This tends
+        to scare managers and make tech people’s eye glow, but the reality is in between.
+        I discuss impacts on recruitment and team management, but also on technical leadership.
+    years: "2026"
+    entries:
+      - lang: fr
+        type: slides
+        url: https://clementd-files.cellar-c2.services.clever-cloud.com/hipster-stacks.html
   - name: "Distributed auth: don’t give up"
     desc: A tour of distributed auth patterns, the associated challenges and how biscuit makes things easier
     featured: true
