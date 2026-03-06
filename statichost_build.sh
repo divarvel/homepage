@@ -3,10 +3,10 @@
 set -euo pipefail
 
 sudo apk add gmp-dev oniguruma-dev
-opam install dune
-opam env > opam.env
+opam-2.5 install dune
+opam-2.5 env > opam.env
 source opam.env
-opam update
-opam install . --deps-only -y
+opam-2.5 update
+opam-2.5 install . --deps-only -y
 dune build
 _build/install/default/bin/homepage
