@@ -12,21 +12,29 @@
   </h3>
   <p>{{ talk.description }}</p>
   {% for entry in talk.entries %}
-    {%- if entry.type == "slides" -%}
-        {%- if entry.lang == "fr" -%}
-          {%- set t = "Lire (en Français 🇫🇷)" -%}
-        {%- else if entry.lang == "en" -%}
-          {%- set t = "Read (in English 🇬🇧)" -%}
+      {%- if entry.lang == "fr" -%}
+        {%- set lang = "en Français 🇫🇷"-%}
+        {%- if entry.type == "slides" -%}
+          {%- set action = "Lire" -%}
+        {%- else if entry.type == "video" -%}
+          {%- set action = "Regarder 📹" -%}
         {%- endif -%}
-    {%- else if entry.type == "video" -%}
-        {%- if entry.lang == "fr" -%}
-          {%- set t = "Regarder 📹 (en Français 🇫🇷)" -%}
-        {%- else if entry.lang == "en" -%}
-          {%- set t = "Watch 📹 (in English 🇬🇧)" -%}
+        {%- if entry.label -%}
+          {%- set conf = eval("{{ ', à ' + entry.label }}") -%}
         {%- endif -%}
-    {%- endif -%}
+      {%- else if entry.lang == "en" -%}
+        {%- set lang = "in English 🇬🇧"-%}
+        {%- if entry.type == "slides" -%}
+          {%- set action = "Read" -%}
+        {%- else if entry.type == "video" -%}
+          {%- set action = "Watch 📹" -%}
+        {%- endif -%}
+        {%- if entry.label -%}
+          {%- set conf = eval("{{ ', at ' + entry.label }}") -%}
+        {%- endif -%}
+      {%- endif -%}
   <span class="talk-entry">
-    <a href="{{ entry.url }}">{{ t }}</a>
+    <a href="{{ entry.url }}">{{ action }} ({{ lang }}{{ conf }})</a>
   </span>
   {% endfor %}
 </article>
