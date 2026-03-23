@@ -1,31 +1,33 @@
 open Yocaml
 open Common
 
-module Talk= struct
+module Talk = struct
   let entity_name = "talk"
 
   type lang = En | Fr
-  let lang_to_string l = match l with
-      | En -> "en"
-      | Fr -> "fr"
+
+  let lang_to_string l = match l with En -> "en" | Fr -> "fr"
+
   let validate_lang x =
-      let open Data.Validation in
-      let* l = string x
-      in match l with
-        | "en" -> Result.Ok En
-        | "fr" -> Result.Ok Fr
-        | _ -> fail_with ~given: l "supported langs are fr and en"
+    let open Data.Validation in
+    let* l = string x in
+    match l with
+    | "en" -> Result.Ok En
+    | "fr" -> Result.Ok Fr
+    | _ -> fail_with ~given:l "supported langs are fr and en"
+
   type entry_type = Slides | Video
-  let entry_type_to_string et = match et with
-      | Slides -> "slides"
-      | Video -> "video"
+
+  let entry_type_to_string et =
+    match et with Slides -> "slides" | Video -> "video"
+
   let validate_entry_type x =
-      let open Data.Validation in
-      let* l = string x
-      in match l with
-        | "slides" -> Result.Ok Slides
-        | "video" -> Result.Ok Video
-        | _ -> fail_with ~given: l "supported types are slides and video"
+    let open Data.Validation in
+    let* l = string x in
+    match l with
+    | "slides" -> Result.Ok Slides
+    | "video" -> Result.Ok Video
+    | _ -> fail_with ~given:l "supported types are slides and video"
 
   type entry = {
     lang : lang;
@@ -44,13 +46,13 @@ module Talk= struct
   }
 
   let validate_entry =
-      let open Data.Validation in
-      record (fun fields ->
-          let+ entry_type = required fields "type" validate_entry_type
-          and+ lang = required fields "lang" validate_lang
-          and+ url = required fields "url" string
-          and+ label = optional fields "label" string
-          in { entry_type; lang; url; label; })
+    let open Data.Validation in
+    record (fun fields ->
+        let+ entry_type = required fields "type" validate_entry_type
+        and+ lang = required fields "lang" validate_lang
+        and+ url = required fields "url" string
+        and+ label = optional fields "label" string in
+        { entry_type; lang; url; label })
 
   let validate =
     let open Data.Validation in
@@ -63,14 +65,15 @@ module Talk= struct
         and+ featured = optional_or ~default:false fields "featured" bool in
         { name; slug = Slug.from name; description; years; entries; featured })
 
-  let entry_to_data { lang; entry_type; url; label;} =
-  let open Data in
-  record [
-      ("lang", string (lang_to_string lang));
-      ("type", string (entry_type_to_string entry_type));
-      ("url", string url);
-      ("label", option string label)
-  ]
+  let entry_to_data { lang; entry_type; url; label } =
+    let open Data in
+    record
+      [
+        ("lang", string (lang_to_string lang));
+        ("type", string (entry_type_to_string entry_type));
+        ("url", string url);
+        ("label", option string label);
+      ]
 
   let normalize { name; slug; description; years; entries; featured } =
     let open Data in
@@ -84,7 +87,6 @@ module Talk= struct
     ]
 
   let to_data talk = Data.record (normalize talk)
-
 end
 
 module TalkList = struct
@@ -95,7 +97,6 @@ module TalkList = struct
   let neutral =
     let talks = [] in
     Result.Ok { talks }
-
 
   let validate =
     let open Data.Validation in
@@ -137,14 +138,18 @@ let (create_talk_page : Talk.t -> Action.t) =
     and+ apply_templates =
       Yocaml_jingoo.read_templates
         Path.[ templates / "talk.html"; templates / "layout.html" ]
-        in apply_templates (module Talk) ~metadata: talk ""
-    in Action.Static.write_file path pipeline
- 
-let (create_talks_pages : Action.t) = fun cache ->
-    let open Eff in
-    let* metadata =
-        Yocaml_yaml.Eff.read_file_as_metadata
-            (module TalkList)
-            ~on: `Target
-            Path.(assets / "talks.md")
-    in Batch.iter metadata.talks create_talk_page cache
+    in
+    apply_templates (module Talk) ~metadata:talk ""
+  in
+  Action.Static.write_file path pipeline
+
+let (create_talks_pages : Action.t) =
+ fun cache ->
+  let open Eff in
+  let* metadata =
+    Yocaml_yaml.Eff.read_file_as_metadata
+      (module TalkList)
+      ~on:`Target
+      Path.(assets / "talks.md")
+  in
+  Batch.iter metadata.talks create_talk_page cache
