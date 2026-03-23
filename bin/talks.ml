@@ -36,6 +36,7 @@ module Talk= struct
 
   type t = {
     name : string;
+    slug : string;
     description : string;
     years : string option;
     entries : entry list;
@@ -57,9 +58,10 @@ module Talk= struct
         let+ name = required fields "name" string
         and+ description = required fields "desc" string
         and+ years = optional fields "years" string
-        and+ entries = optional_or ~default: [] fields "entries" (list_of validate_entry)
-        and+ featured = optional_or ~default:false fields "featured" bool
-        in { name; description; years; entries; featured })
+        and+ entries =
+          optional_or ~default:[] fields "entries" (list_of validate_entry)
+        and+ featured = optional_or ~default:false fields "featured" bool in
+        { name; slug = Slug.from name; description; years; entries; featured })
 
   let entry_to_data { lang; entry_type; url; label;} =
   let open Data in
@@ -70,14 +72,15 @@ module Talk= struct
       ("label", option string label)
   ]
 
-  let normalize { name; description; years; entries; featured; } =
+  let normalize { name; slug; description; years; entries; featured } =
     let open Data in
     [
-    ("name", string name);
-    ("description", string description);
-    ("years", option string years);
-    ("entries", list_of entry_to_data entries);
-    ("featured", bool featured)
+      ("name", string name);
+      ("slug", string slug);
+      ("description", string description);
+      ("years", option string years);
+      ("entries", list_of entry_to_data entries);
+      ("featured", bool featured);
     ]
 
   let to_data talk = Data.record (normalize talk)
@@ -125,12 +128,13 @@ let (create_talk_index : Action.t) =
   in
   Action.Static.write_file path pipeline
 
-let (create_talk_page : Talk.t -> Action.t) = fun talk ->
-    let path = Path.(www / "talks" / (Slug.from talk.name ^ ".html")) in
-    let pipeline =
-        let open Task in
-        let+ () = track_binary
-        and+ apply_templates =
+let (create_talk_page : Talk.t -> Action.t) =
+ fun talk ->
+  let path = Path.(www / "talks" / (talk.slug ^ ".html")) in
+  let pipeline =
+    let open Task in
+    let+ () = track_binary
+    and+ apply_templates =
       Yocaml_jingoo.read_templates
         Path.[ templates / "talk.html"; templates / "layout.html" ]
         in apply_templates (module Talk) ~metadata: talk ""

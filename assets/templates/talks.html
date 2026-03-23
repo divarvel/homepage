@@ -9,6 +9,7 @@
 <article>
   <h3>{{ talk.name }}
    {% if talk.years %}<span class="talk-years">{{ talk.years }}</span>{% endif %}
+   <a href="/talks/{{talk.slug}}.html" class="talk-permalink">(permalink)</a>
   </h3>
   <p>{{ talk.description }}</p>
   {% for entry in talk.entries %}
