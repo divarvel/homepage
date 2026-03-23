@@ -52,7 +52,7 @@ talks:
         type: video
         label: "DDDDD"
         url: https://www.youtube.com/watch?v=sIJr3SCKhjo
-      - lang: en
+      - lang: fr
         type: video
         label: "LambdaLille"
         url: https://www.youtube.com/watch?v=qB_hDiQtrMo&list=PLgqACm4pzpkxFQDWtkArFtlgjnbFRW2nR
