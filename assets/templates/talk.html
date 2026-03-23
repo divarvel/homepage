@@ -3,7 +3,7 @@
    {% if years %}<span class="talk-years">{{ years }}</span>{% endif %}
   </h1>
   <p>{{ description }}</p>
-  {% for entry in talk.entries %}
+  {% for entry in entries %}
       {%- if entry.lang == "fr" -%}
         {%- set lang = "en Français 🇫🇷"-%}
         {%- if entry.type == "slides" -%}
