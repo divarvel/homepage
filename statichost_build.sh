@@ -2,9 +2,7 @@
 
 set -euxo pipefail
 
-# the repo is checked out by root
-# but the docker image runs as opam
-sudo chown opam:opam -R .
+git config --global --add safe.directory /repo
 sudo apk add gmp-dev oniguruma-dev git
 opam env > opam.env
 source opam.env
