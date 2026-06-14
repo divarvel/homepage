@@ -5,6 +5,8 @@ set -euxo pipefail
 pwd
 whoami
 ls -al
+sudo chown opam:opam -R .
+ls -al
 
 sudo apk add gmp-dev oniguruma-dev git
 opam env > opam.env
