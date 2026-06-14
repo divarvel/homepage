@@ -2,6 +2,10 @@
 
 set -euxo pipefail
 
+pwd
+whoami
+ls -al
+
 sudo apk add gmp-dev oniguruma-dev git
 opam env > opam.env
 source opam.env
