@@ -10,6 +10,9 @@ talks:
       - lang: fr
         type: slides
         url: https://clementd-files.cellar-c2.services.clever-cloud.com/hipster-stacks.html
+      - lang: fr
+        type: video
+        url: https://www.youtube.com/watch?v=lk-9JTqSw4o
   - name: "Distributed auth: don’t give up"
     desc: A tour of distributed auth patterns, the associated challenges and how biscuit makes things easier
     featured: true
