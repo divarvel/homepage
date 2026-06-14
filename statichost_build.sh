@@ -2,17 +2,14 @@
 
 set -euxo pipefail
 
-pwd
-whoami
-ls -al
+# the repo is checked out by root
+# but the docker image runs as opam
 sudo chown opam:opam -R .
-ls -al
-
 sudo apk add gmp-dev oniguruma-dev git
 opam env > opam.env
 source opam.env
 opam update
 opam upgrade
-opam install --verbose . --deps-only -y
-opam exec --verbose -- dune build --profile=release
-opam exec --verbose -- dune exec bin/homepage.exe
+opam install . --deps-only -y
+opam exec -- dune build --profile=release
+opam exec -- dune exec bin/homepage.exe
